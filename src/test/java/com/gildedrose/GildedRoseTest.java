@@ -12,10 +12,8 @@ public class GildedRoseTest {
         Item[] items = new Item[] { new Item("Other Item", -1, 10) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
-        System.out.println(app.items[0].quality);
         assertEquals(app.items[0].quality,8);
     }
-    
     //The Quality of an item is never negative
     @Test
     public void qualityNeverNegative() {
@@ -30,7 +28,6 @@ public class GildedRoseTest {
         Item[] items = new Item[] { new Item("Aged Brie", 2, 43) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
-        System.out.println(app.items[0].quality);
         assertEquals(app.items[0].quality,44);
     }
     //The Quality of an item is never more than 50
@@ -60,6 +57,34 @@ public class GildedRoseTest {
      * Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but
      * Quality drops to 0 after the concert
      */
+    @Test
+    public void qualityBackstage10() {
+        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 10, 20) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(app.items[0].quality,22);
+    }
+    @Test
+    public void qualityBackstage5() {
+        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 5, 20) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(app.items[0].quality,23);
+    }
+    @Test
+    public void qualityConjured() {
+        Item[] items = new Item[] { new Item("Conjured", 5, 20) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(app.items[0].quality,18);
+    }
+    @Test
+    public void qualityConjured0() {
+        Item[] items = new Item[] { new Item("Conjured", 0, 20) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(app.items[0].quality,16);
+    }
 	
     
 
